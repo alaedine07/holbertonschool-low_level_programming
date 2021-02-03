@@ -1,9 +1,7 @@
-#include <stdio.h>
-#include <string.h>
 #include <unistd.h>
 /**
  * main - entry point
- * print message new way
+ * display message new way
  * Return: Error
  */
 int main(void)
