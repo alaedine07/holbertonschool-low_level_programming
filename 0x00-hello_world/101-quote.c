@@ -3,7 +3,7 @@
 #include <unistd.h>
 /**
  * main - entry point
- * print message without printf
+ * print message new way
  * Return: Error
  */
 int main(void)
