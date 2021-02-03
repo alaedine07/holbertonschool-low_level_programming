@@ -1,4 +1,9 @@
 #include <stdio.h>
+/**
+ * main - entry point
+ * print size of var types
+ * Return: Sucess
+ */
 int main(void)
 {
 	printf("Size of a char: %ld byte(s)\n", sizeof(char));
