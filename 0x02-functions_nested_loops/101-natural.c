@@ -16,14 +16,14 @@ int main(void)
 	{
 		if (i % 3 == 0)
 		{
-			sum = sum + i
+			sum = sum + i;
 		}
 		if (i % 5 == 0)
 		{
-			sum = sum + i
+			sum = sum + i;
 		}
 		i = i + 1;
-	} while (i < 1024)
-	printf("%d", sum);
+	} while (i < 1024);
+	printf("%d\n", sum);
 	return (0);
 }
