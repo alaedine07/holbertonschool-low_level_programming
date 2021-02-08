@@ -1,12 +1,17 @@
 #include "holberton.h"
-#include <stdlib.h>
 /**
- * _abs - print abs version
- * @x : ascii int to check
- * Return: int
- *
+ * _abs - compute absolute value of integer.
+ * @x: type integer
+ * Return: always 0.
  */
 int _abs(int x)
 {
-	return (abs(x));
+	if (x < 0)
+	{
+		return (x * -1);
+	}
+	else
+	{
+		return (x);
+	}
 }

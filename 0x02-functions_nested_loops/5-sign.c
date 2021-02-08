@@ -6,11 +6,11 @@
  *
  */
 int print_sign(int c)
-{	
+{
 	int r;
-	
+
 	if (c > 0)
-	{	
+	{
 		_putchar('+');
 		r = 1;
 	}
@@ -25,4 +25,4 @@ int print_sign(int c)
 		r = 0;
 	}
 return (r);
-} 
+}
