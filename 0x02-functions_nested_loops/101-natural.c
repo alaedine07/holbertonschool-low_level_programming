@@ -24,5 +24,6 @@ int main(void)
 		}
 		i = i + 1;
 	} while (i < 1024)
+	printf("%d", sum);
 	return (0);
 }
