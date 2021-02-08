@@ -9,20 +9,16 @@ int main(void)
 {
 	int sum, i;
 
-	sum = 0;
-	i = 0;
+	sum = 23;
+	i = 10;
 	do
 
 	{
-		if (i % 3 == 0)
+		if (i % 3 == 0 || i % 5 == 0)
 		{
 			sum = sum + i;
 		}
-		if (i % 5 == 0)
-		{
-			sum = sum + i;
-		}
-		i = i + 1;
+		i++;
 	} while (i < 1024);
 	printf("%d\n", sum);
 	return (0);
