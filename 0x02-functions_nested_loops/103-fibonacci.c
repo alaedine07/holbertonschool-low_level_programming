@@ -24,6 +24,6 @@ if ((term_3 % 2) == 0)
 term_1 = term_2;
 term_2 = term_3;
 } while (sum < 4000000);
-printf("%ld\n", term_3);
+printf("%ld\n", sum);
 return (0);
 }
