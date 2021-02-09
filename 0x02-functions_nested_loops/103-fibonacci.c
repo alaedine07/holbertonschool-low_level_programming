@@ -25,7 +25,7 @@ term_1 = term_2;
 term_2 = term_3;
 printf("%ld\n",sum);
 
-} while (term_3 < 4000000);
+} while (sum < 4000000);
 printf("%ld\n", term_3);
 return (0);
 }
