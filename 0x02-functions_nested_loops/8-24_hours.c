@@ -16,9 +16,9 @@ void jack_bauer(void)
 			 * because _putchar only prints ascii not chars
 			 */
 			_putchar(i / 10 + '0');
-			_putchar(j % 10 + '0');
+			_putchar(i % 10 + '0');
 			_putchar(':');
-			_putchar(i / 10 + '0');
+			_putchar(j / 10 + '0');
 			_putchar(j % 10 + '0');
 			_putchar('\n');
 		}
