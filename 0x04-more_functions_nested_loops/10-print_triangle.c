@@ -10,37 +10,33 @@ void print_triangle(int size)
 	if (size > 0)
 	{
 	for (i = 1; i <= size; i++)
-	{	/*
-		 * if it's the last line
-		 */
+	{
 		if (i == size)
 		{
 			for (j = 0; j < size; j++)
 			{
-				printf("#");
+				_putchar(35);
 			}
 		}
 		else
-		{	/*
-			 * trying to print the _ in this loop
-			 */
+		{
 			for (j = size; j >= i + 1; j--)
 			{
-			printf(" ");
+			_putchar(' ');
 			}
 			/*
 			 * printing the # in this loop
 			*/
 			for (k = 1; k <= i; k++)
 			{
-			printf("#");
+			_putchar(35);
 			}
 		}
-	printf("\n");
+	_putchar('\n');
 	}
 	}
 	else
 	{
-	printf("\n");
+	_putchar('\n');
 	}
 }
