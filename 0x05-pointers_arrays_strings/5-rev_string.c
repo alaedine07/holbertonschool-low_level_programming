@@ -1,22 +1,35 @@
 #include "holberton.h"
-#include <stdio.h>
+/**
+ * rev_string - reverse a string
+ * @s: the string to reverse
+ * Return: void.
+ */
 void rev_string(char *s)
 {
-	char aux;
-	int size = 0;
+	char *start_of_string, *end_of_string, aux;
 	int i;
+	int size = 0;
+	/* both pointers are pointing to the string */
+	start_of_string = s;
+	end_of_string = s;
+	/* calculating string length */
 	while (*(s + size) != 0)
 	{
-		size = size + 1;
+		size++;
 	}
-	i = 0;
-	while (*(s + i) != 0)
+	/* pushing the end_of string pointer to the end of the string */
+	for (i = 0; i < size - 1; i++)
 	{
-		aux = *(s + i);
-		*(s + i) = *(s + size);
-		*(s + size) = aux;
-		i = i + 1;
-		size = size - 1;
-
+		end_of_string++;
+	}
+	/* swapping we only need hal of the string*/
+	for (i = 0; i < size / 2; i++)
+	{
+		aux = *end_of_string;
+		*end_of_string = *start_of_string;
+		*start_of_string = aux;
+		/* decrementing and incrementing pointers to next char*/
+		start_of_string++;
+		end_of_string--;
 	}
 }
