@@ -1,5 +1,8 @@
 #include <stdio.h>
-
+/**
+ * main - entry point
+ * Return: always true
+*/
 int main(void)
 {
 	int n;
