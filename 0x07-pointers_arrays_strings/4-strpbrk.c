@@ -23,12 +23,12 @@ char *_strpbrk(char *s, char *accept)
 		}
 	}
 	if (found == 1)
+	{
+		while (i > 1)
 		{
-			while (i > 1)
-			{
-				s++;
-				i--;
-			}
+			s++;
+			i--;
+		}
 			return (s);
 		}
 	else
