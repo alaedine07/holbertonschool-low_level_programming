@@ -22,10 +22,17 @@ char *_strpbrk(char *s, char *accept)
 			}
 		}
 	}
-	while (i > 1)
+	if (found == 1)
+		{
+			while (i > 1)
+			{
+				s++;
+				i--;
+			}
+			return (s);
+		}
+	else
 	{
-		s++;
-		i--;
+		return (0);
 	}
-	return (s);
 }
