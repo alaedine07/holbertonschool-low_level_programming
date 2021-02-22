@@ -3,7 +3,7 @@
 
 /**
 * print_chessboard - fills memory with a constant byte.
-* @a: the memory area to print in
+* @a: argument1
 * Return: void.
 */
 
