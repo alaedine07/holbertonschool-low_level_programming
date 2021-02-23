@@ -9,7 +9,7 @@
 
 char *_strstr(char *haystack, char *needle)
 {
-	int length_needle = 0, i, j;
+	unsigned int length_needle = 0, i, j;
 	/* get the length of the needle string */
 	while (needle[length_needle] != '\0')
 	{
@@ -21,18 +21,18 @@ char *_strstr(char *haystack, char *needle)
 			if (haystack[i] == needle[0])
 			{	/* i is fixed cuz that's where to return */
 				j = 0;
-				while (haystack[i + j] == needle[j])
+				while (haystack[i + j] == needle[j] && needle[j] != '\0')
 				{
 					j++;
 				}
 				/* j matched all chars in needle and haystack */
-				if (j - 1 == length_needle)
+				if (j == length_needle)
 				{
 					return (&haystack[i]);
 				}
 			}
 		i++;
 		}
-	return (0);
+	return ("");
 }
 
