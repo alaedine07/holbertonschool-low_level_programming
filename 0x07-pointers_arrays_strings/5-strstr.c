@@ -15,24 +15,23 @@ char *_strstr(char *haystack, char *needle)
 	{
 		length_needle++;
 	}
-		i = 0;
-		while (haystack[i] != '\0')
-		{	/* if a char from haystack match the first char of needle */
-			if (haystack[i] == needle[0])
-			{	/* i is fixed cuz that's where to return */
-				j = 0;
-				while (haystack[i + j] == needle[j] && needle[j] != '\0')
-				{
-					j++;
-				}
-				/* j matched all chars in needle and haystack */
-				if (j == length_needle)
-				{
-					return (&haystack[i]);
-				}
+	i = 0;
+	while (haystack[i] != '\0')
+	{	/* if a char from haystack match the first char of needle */
+		if (haystack[i] == needle[0])
+		{	/* i is fixed cuz that's where to return */
+			j = 0;
+			while (haystack[i + j] == needle[j])
+			{
+				j++;
 			}
-		i++;
+			/* j matched all chars in needle and haystack */
+			if (j == length_needle)
+			{
+				return (&haystack[i]);
+			}
 		}
-	return (NULL);
+	i++;
+	}
+return ('\0');
 }
-
