@@ -30,11 +30,11 @@ char *_strstr(char *haystack, char *needle)
 			/* j matched all chars in needle and haystack */
 			if (j == length_needle)
 			{
-				return (&haystack[i]);
+				return (haystack + i);
 			}
 		}
 	i++;
 	}
 	}
-return (haystack);
+return ('\0');
 }
