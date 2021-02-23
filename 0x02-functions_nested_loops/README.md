@@ -1,1 +1,9 @@
-problem solving and using custom header file
+learn nested loops and how to use them. 
+
+What is a function and how do you use functions? 
+
+What is the difference between a declaration and a definition of a function? 
+
+What is a prototype?
+
+what is a header file and how to create one ?

@@ -1,1 +1,1 @@
-linux basic programming
+Going through compilation steps with GCC 
