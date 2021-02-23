@@ -11,8 +11,10 @@ char *_strstr(char *haystack, char *needle)
 {
 	unsigned int length_needle = 0, i, j;
 	/* get the length of the needle string */
-	if (needle[0] != '\0')
+	if (needle[0] == '\0')
 	{
+		return (haystack);
+	}
 	while (needle[length_needle] != '\0')
 	{
 		length_needle++;
@@ -35,6 +37,5 @@ char *_strstr(char *haystack, char *needle)
 		}
 	i++;
 	}
-	}
-return ('\0');
+return (0);	
 }
