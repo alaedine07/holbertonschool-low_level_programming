@@ -1,5 +1,4 @@
 #include "holberton.h"
-#include <stdio.h>
 /**
 * check - recursive string comparison
 * @str: string
@@ -47,7 +46,7 @@ int is_palindrome(char *s)
 	{
 		return (1);
 	}
-	/* get the length of the string s */
+	/* get the length of the string s with recursive function */
 	else
 	{
 	n = _strlen_recursion(s);
