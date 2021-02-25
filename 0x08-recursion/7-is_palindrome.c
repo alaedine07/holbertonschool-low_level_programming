@@ -18,10 +18,7 @@ int check(char *str, int index, int len)
 	{
 		return (1);
 	}
-	while (index < len)
-	{
-		check(str, index + 1, len - 1);
-	}
+	check(str, index + 1, len - 1);
 	return (1);
 }
 /**
