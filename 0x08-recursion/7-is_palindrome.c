@@ -19,7 +19,7 @@ int check(char *str, int index, int len)
 	else
 	{
 	/* len and index are on the same char */
-	return check(str, index + 1, len - 1);
+	return (check(str, index + 1, len - 1));
 	}
 }
 /**
