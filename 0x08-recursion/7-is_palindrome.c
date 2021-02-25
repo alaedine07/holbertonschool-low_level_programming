@@ -12,13 +12,15 @@ int check(char *str, int index, int len)
 	{
 		return (0);
 	}
-	/* len and index are on the same char */
-	if (index == len)
+	if (index > len)
 	{
 		return (1);
 	}
-	check(str, index + 1, len - 1);
-	return (1);
+	else
+	{
+	/* len and index are on the same char */
+	return check(str, index + 1, len - 1);
+	}
 }
 /**
 * _strlen_recursion - calculate length of string.

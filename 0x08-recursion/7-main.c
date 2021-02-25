@@ -9,6 +9,8 @@
 int main(void)
 {
     int r;
+    r = is_palindrome("d");
+    printf("%d\n", r);
     r = is_palindrome("level");
     printf("%d\n", r);
     r = is_palindrome("");

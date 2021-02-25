@@ -16,10 +16,6 @@ int search(int n, float sqrt, float temp)
 	return (search(n, ((n / temp + temp) / 2), temp));
 
 }
-
-
-
-
 /**
 * _sqrt_recursion - natural square root
 * @n: argument 1
