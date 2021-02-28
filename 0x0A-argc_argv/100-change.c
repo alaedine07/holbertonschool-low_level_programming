@@ -21,32 +21,17 @@ int main(int argc, char **argv)
 		occ = 0;
 	else
 	{
+		i = 0;
 		occ = 0;
-		while (cents != 0)
-		{	/* checking if cents already exists in coins table */
-			for (i = 0; i < 5; i++)
+		while (cents > 0)
+		{
+			if (coins[i] <= cents)
 			{
-				if (coins[i] == cents)
-				{
-					cents = cents - coins[i];
-					occ++;
-					break;
-				}
+				cents = cents - coins[i];
+				occ++;
 			}
-			if (cents != 0)
-			{
-				i = 0;
-				while (cents > 0)
-				{
-					if (coins[i] <= cents)
-					{
-						cents = cents - coins[i];
-						occ++;
-					}
-					else
-						i++;
-				}
-			}
+			else
+				i++;
 		}
 	}
 printf("%d\n", occ);
