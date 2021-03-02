@@ -41,11 +41,12 @@ char *str_concat(char *s1, char *s2)
 			i++;
 		}
 		i = 0;
-		while (i <= size2)
+		while (i < size2)
 		{
 			p[i + size1] = s2[i];
 			i++;
 		}
+		p[size1 + size2] = '\0';
 		return (p);
 	}
 }
