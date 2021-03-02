@@ -13,7 +13,8 @@ int **alloc_grid(int width, int height)
 	/**
 	 * 2-D array is actually a 1-D array where each element is a 1-D array,
 	 * so *array will point to the first value of the first 1D array
-	 * so **array will be pointing to a block of pointers(each one is A 1D array)
+	 * so **array will be pointing to a block of pointers which points to a 1D array
+	 * check this: https://www.eskimo.com/~scs/cclass/int/sx9b.html
 	 */
 	int **array;
 
@@ -28,22 +29,17 @@ int **alloc_grid(int width, int height)
 		{
 			return (NULL);
 		}
-		else
-		{
-			for (i = 0; i < height; i++)
-			{	/* now we fill every 1D array */
-				array[i] = malloc(width * sizeof(int));
-				if (array[i] == NULL)
-				{
-					return (NULL);
-				}
-				else
-				{
-					for (j = 0; j < width; j++)
-					{
-						array[i][j] = 0;
-					}
-				}
+		for (i = 0; i < height; i++)
+		{	/* now we fill every 1D array */
+			array[i] = malloc(width * sizeof(int));
+			if (array[i] == NULL)
+			{
+				return (NULL);
+			}
+			for (j = 0; j < width; j++)
+			{
+				array[i][j] = 0;
+			}
 		}
 		return (array);
 	}
