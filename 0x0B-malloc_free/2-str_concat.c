@@ -33,20 +33,17 @@ char *str_concat(char *s1, char *s2)
 	{
 		return (NULL);
 	}
-	else
+	while (i < size1)
 	{
-		while (i < size1)
-		{
-			p[i] = s1[i];
-			i++;
-		}
-		i = 0;
-		while (i < size2)
-		{
-			p[i + size1] = s2[i];
-			i++;
-		}
-		p[size1 + size2] = '\0';
-		return (p);
+		p[i] = s1[i];
+		i++;
 	}
+	i = 0;
+	while (i < size2)
+	{
+		p[i + size1] = s2[i];
+		i++;
+	}
+	p[size1 + size2] = '\0';
+	return (p);
 }
