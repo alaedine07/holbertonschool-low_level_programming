@@ -14,14 +14,14 @@ char *str_concat(char *s1, char *s2)
 	char *p;
 	int i = 0;
 
-	if (*s1 != NULL)
+	if (*s1 != '\0')
 	{
 		while (s1[size1] != '\0')
 		{
 			size1++;
 		}
 	}
-	if (*s2 != NULL)
+	if (*s2 != '\0')
 	{
 		while (s2[size2] != '\0')
 		{
@@ -46,6 +46,7 @@ char *str_concat(char *s1, char *s2)
 			p[i + size1] = s2[i];
 			i++;
 		}
+		p[size1 + size2] = '\0';
 		return (p);
 	}
 }
