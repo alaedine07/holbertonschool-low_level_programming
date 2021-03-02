@@ -1,0 +1,1 @@
+dynamic allocation with malloc
