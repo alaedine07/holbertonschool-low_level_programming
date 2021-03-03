@@ -3,29 +3,48 @@
 #include <stdlib.h>
 #include <string.h>
 /**
- * free_grid - free allocated memory space by grid.
- * @grid: pointer to pointer to array.
- * @height: array height.
+ * argstostr - seperate arguments
+ * @ac: number of argument.
+ * @av: arguments.
+ * Return: pointer to string
  */
 char *argstostr(int ac, char **av)
 {
-	int i;
-	char **array;
-	
-	if (ac == 0 || av == NULL)
+	int length = 0, i, j, c;
+	char *p;
+
+	if (ac == NULL || av == NULL)
 	{
 		return (NULL);
 	}
-	/* allocate ac char pointers */
-	array = malloc((ac) * sizeof(char *));
-	/* I need to copy the arguments to allocated space */
-	for (i = 1; i < ac; i++)
-	{	
-		/* +1 to get the null terminator when copying */
-		array[i] = malloc(strlen(*av) + 1);
-		strcpy(array[i], *av);
-		av++;
+	for (i = 0; i < ac; i++)
+	{	/* for every argument given calculate it's length */
+		for (j = 0; av[i][j] != '\0'; j++)
+		{
+			length++;
+		}
 	}
-	array[i] = NULL;
-	return (array);
+	/* allocates space to hold the number of given char */
+	p = malloc((length + ac + 1) * sizeof(char));
+	/**
+	 * length is number of chars,
+	 * ac to add NULL of each string and + 1 for last NULL
+	 */
+	if (p == NULL)
+	{
+		return (NULL);
+	}
+	c = 0;
+	for (i = 0; i < ac; i++)
+	{
+		for (j = 0; av[i][j] != '\0'; j++)
+		{
+			p[c] = av[i][j];
+			c++;
+		}
+		p[c] = '\n';
+		c++;
+	}
+	p[c] = '\0';
+	return (p);
 }
