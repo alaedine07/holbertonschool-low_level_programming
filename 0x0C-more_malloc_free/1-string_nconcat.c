@@ -40,9 +40,11 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	}
 	l1 = _getlength(s1);
 	l2 = _getlength(s2);
-	/* counting the null byte */
-	l2 = l2;
-	if (n < l2)
+	if (n > l2)
+	{
+		n = l2;
+	}
+	else
 	{
 		l2 = n;
 	}
