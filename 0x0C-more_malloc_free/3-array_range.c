@@ -24,7 +24,8 @@ int *array_range(int min, int max)
 	{
 		if (i >= min)
 		{
-			p[i] = i;
+			p[i] = min;
+			min++;
 		}
 	}
 
