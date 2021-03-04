@@ -3,16 +3,16 @@
 #include <stdio.h>
 /**
  * *_realloc - reallocate memory from previous
+ * @ptr: pointer to previous space
  * @old_size: param1
  * @new_size: param2
  * Return: void pointer
  **/
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
-{	
+{
 	/* the main is type casting ptr to char */
-	char *allo;
-	unsigned int i; 
-	
+	void *allo;
+
 	if (ptr == NULL)
 	{
 		allo = malloc(new_size);
@@ -42,9 +42,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	{
 		return (NULL);
 	}
-	for (i = 0; i < old_size; i++)
-	{
-		allo[i] = ptr[i];
-	}
+	/* if I return allo, i need to free ptr */
+	free(ptr);
 	return (allo);
 }
