@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+/**
+ * verif_digit - verify if str contain only digit
+ * @str: param1
+ * Return: true or false
+ **/
 int verif_digit(char *str)
 {
 	int i = 0;
@@ -18,69 +22,80 @@ int verif_digit(char *str)
 	}
 	return (0);
 }
-
-int _atoi(char *s)
+/**
+ * len - calculate number length (number of digits).
+ * @p: pointer to char.
+ * Return: length.
+ */
+int len(char *p)
 {
-	unsigned int start, i, sign = 1, is_a_number, first_number, result = 0;
+	int len = 0;
 
-	first_number = 0;
-	is_a_number = 0;
-	i = 0;
-	if (*s == '\0')
-	{
-		return (result);
-	}
-	while (is_a_number == 0)
-	{
-		if ((s[i] >= '0' && s[i] <= '9') && (*s != '\0'))
-		{
-			is_a_number = 1;
-			first_number = i;
-		}
-		if (s[i] == '-')
-		{
-			sign = sign * -1;
-			i = i + 1;
-		}
-		else
-		i = i + 1;
-	}
-	start = first_number;
-	while ((s[start] >= '0' && s[start] <= '9') && (*s != '\0'))
-	{
-		result = result * 10 + s[start] - '0';
-		start++;
-	}
-	return (sign * result);
+	while (p[len] != '\0')
+		len++;
+	return (len);
 }
-
-void my_print(int number)
+/**
+ * do_works - allocates the 2D array.
+ * @rows: number of rows.
+ * @heigher: first iteration.
+ * @lower: second iteration.
+ * Return: always Success.
+ */
+int **do_work(int rows, char *heigher, char *lower)
 {
-	
+	int **array = malloc(rows * sizeof(int *));
+	if (array == NULL)
+	{
+		return (NULL);
+	}
+	for (i = 0; i < rows; i++)
+	{
+		int array[i] = malloc((len(heigher)) * sizeof(int) + (i + 1));
+		if (array[i] == NULL)
+		{
+			free(allo[i]);
+			return (NULL);
+		}
+	}
+	for (j = len(heigher); j >= 0 ; j--)
+	{
+		for (h = len(lower); h >= 0; h)
+	}
+	return (arr);
 }
-
+/**
+ * main - entry point.
+ * @argc: number of arguments.
+ * Return: always Success.
+ */
 int main(int argc, char **argv)
 {
 	int x = 0;
-	int r;
-	char *num1;
-	char *num2;
+	int r, l1, l2, rows;
+	char *heigher;
+	char *lower;
+	int **final; 
 	
-	if (argc != 3)
+	if (argc != 3 || verif_digit(argv[1]) == 1 || verif_digit(argv[2]) == 1)
 	{
 		printf("Error\n");
 		exit(98);	
-	}
-	num1 = argv[1];
-	num2 = argv[2];
-	x = verif_digit(num1);
-	x = verif_digit(num2);
-	if (x == 1)
+	} 
+	l1 = len(argv[1]);
+	l2 = len(argv[2]);
+	if (l1 >= l2)
 	{
-		printf("Error\n");
-		exit(98);
+		rows = l2;
+		heigher = argv[1];
+		lower = argv[2];
 	}
-	r = atoi(argv[1]) * _atoi(argv[2]);
-	my_print(r);
+	else
+	{
+		rows = l1;
+		heigher = argv[2];
+		lower = argv[1];
+	}
+	final_ar = do_work(rows, heigher, lower); 
 	return (0);
 }
