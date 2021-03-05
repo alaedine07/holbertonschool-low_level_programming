@@ -10,7 +10,7 @@
  **/
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	/* the main is type casting ptr to char */
+	/* it will be casted to char at main */
 	void *allo;
 
 	if (ptr == NULL)
@@ -20,6 +20,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 		{
 			return (NULL);
 		}
+		/* if I return allo, i need to free ptr */
 		free(ptr);
 		return (allo);
 	}
@@ -37,12 +38,15 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	{
 		return (ptr);
 	}
+	/**
+	 * main is not initializing the first allocated space before calling _realloc
+	 * no need to loop and take values from an empty space XD
+	 */
 	allo = malloc(new_size);
 	if (allo == NULL)
 	{
 		return (NULL);
 	}
-	/* if I return allo, i need to free ptr */
 	free(ptr);
 	return (allo);
 }
