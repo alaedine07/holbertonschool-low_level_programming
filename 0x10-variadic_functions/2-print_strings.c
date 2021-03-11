@@ -12,7 +12,6 @@
 void print_strings(const char *separator, const unsigned int n, ...)
 {
 	unsigned int i;
-	char sep = *separator;
 	va_list ap;
 	char *ch;
 
@@ -32,7 +31,7 @@ void print_strings(const char *separator, const unsigned int n, ...)
 			}
 			if (separator != NULL)
 			{
-				printf("%c", sep);
+				printf("%s", separator);
 			}
 		printf("%s", va_arg(ap, char *));
 		}

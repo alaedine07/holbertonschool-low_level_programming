@@ -1,5 +1,15 @@
 #ifndef VARIADIC_FUNCTIONS_H
 #define VARIADIC_FUNCTIONS_H
+/**
+* struct choice - the struct
+* @c: the format
+* @ptr_fn: desired func
+*/
+typedef struct choice
+{
+	char c;
+	void (*ptr_fn)(va_list);
+} op_t;
 
 int sum_them_all(const unsigned int n, ...);
 void print_numbers(const char *separator, const unsigned int n, ...);

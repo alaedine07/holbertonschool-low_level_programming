@@ -3,42 +3,62 @@
 #include <stdio.h>
 #include "variadic_functions.h"
 
-/*void print_char(char *str)
+/**
+* pchar - prints a char for args
+* @ap: the arg
+* Return: void
+*/
+void pchar(va_list ap)
 {
-	printf("%c", str);
+	printf("%c", va_arg(ap, int));
 }
-void print_int(char *str)
+/**
+* pint - prints a int for args
+* @ap: the arg
+* Return: void
+*/
+void pint(va_list ap)
 {
-	printf("%i", str);
+	printf("%i", va_arg(ap, int));
 }
-void print_float(char *str)
+/**
+* pfloat - prints a float for args
+* @ap: the arg
+* Return: void
+*/
+void pfloat(va_list ap)
 {
-	printf("%f", str);
+	printf("%f", va_arg(ap, double));
 }
-void print_string(char *str)
+/**
+* pstring - prints a string for args
+* @ap: the arg
+* Return: void
+*/
+void pstring(va_list ap)
 {
-	printf("%s", str);
+	printf("%s", va_arg(ap, char *));
 }
+/**
+* print_all - prints args depending on separator
+* @format: format specifier
+* Return: void
 */
 void print_all(const char * const format, ...)
 {
 	int i, j;
-	
+
 	op_t ops[] = {
-		{"c", pchar},
-		{"i", pint},
-		{"f", pfloat},
-		{"s", pstring},
-		{NULL, NULL}
+		{'c', pchar},
+		{'i', pint},
+		{'f', pfloat},
+		{'s', pstring},
+		{0, NULL}
 	};
-	
-	typedef struct choice 
-	{
-		char c;
-		void (*ptr_fn)(char *);
-	} op_t; 
+
 	/* declaring argument pointer of type va_list */
 	va_list ap;
+
 	va_start(ap, format);
 	i = 0;
 	while (*(format + i))
@@ -46,11 +66,18 @@ void print_all(const char * const format, ...)
 		j = 0;
 		while (j < 5)
 		{
-			if (choice[j].c == *(format + i))
+			if (ops[j].c == *(format + i))
 			{
-				printf("yes\n");
+				ops[j].ptr_fn(ap);
+				if (*(format + i + 1) != '\0')
+				{
+					printf(", ");
+				}
 			}
+			j++;
 		}
+		i++;
 	}
+	printf("\n");
 	va_end(ap);
 }
