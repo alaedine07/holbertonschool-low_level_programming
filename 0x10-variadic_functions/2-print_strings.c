@@ -34,8 +34,15 @@ void print_strings(const char *separator, const unsigned int n, ...)
 				printf("%s", separator);
 			}
 		}
-	ch = va_arg(ap, char *);
-	printf("%s", ch);
+		ch = va_arg(ap, char *);
+		if (ch == NULL)
+		{
+			printf("(nil)");
+		}
+		else
+		{
+			printf("%s", ch);
+		}
 	}
 	printf("\n");
 	va_end(ap);
