@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include "variadic_functions.h"
 /**
  * print_numbers - print numbers with a separator
  * @n: number of elements
@@ -23,4 +24,5 @@ void print_numbers(const char *separator, const unsigned int n, ...)
 		}
 	}
 	printf("%d\n", va_arg(ap, int));
+	va_end(ap);
 }

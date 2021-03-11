@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include "variadic_functions.h"
 /**
  * print_strings - print strings passed with a separator
  * @separator: seperate between numbers
