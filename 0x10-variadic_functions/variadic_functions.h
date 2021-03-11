@@ -8,7 +8,7 @@
 typedef struct choice
 {
 	char c;
-	void (*ptr_fn)(va_list);
+	void (*ptr_fn)();
 } op_t;
 
 int sum_them_all(const unsigned int n, ...);
