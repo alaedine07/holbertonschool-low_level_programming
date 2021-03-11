@@ -11,7 +11,7 @@ int sum_them_all(const unsigned int n, ...)
 	unsigned int i;
 	int sum;
 	va_list ap;
-
+	/* ap: arguments parameter points to the first argument */
 	va_start(ap, n);
 	if (n == 0)
 	{
@@ -19,7 +19,7 @@ int sum_them_all(const unsigned int n, ...)
 	}
 	sum = 0;
 	for (i = 0; i < n; i++)
-	{
+	{	/* access arguments by successive call to va_arg */
 		sum = sum + va_arg(ap, int);
 	}
 	va_end(ap);
