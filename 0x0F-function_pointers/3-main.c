@@ -1,31 +1,36 @@
-#include <stddef.h>
+#include "3-calc.h"
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 /**
- * main - entry point
- * @argc: number of arguments
- * @argv: arguments passed
- * Return: depends
- * TODO:  check if atoi return correct
- **/
+ *main - entry point
+ *@argc: argument count
+ *@argv: arguments
+ * Return: always true
+**/
 int main(int argc, char **argv)
 {
-	int x, y;
+	int num1, num2;
+	int (*fun_ptr)(int, int);
+	int result;
 
 	if (argc != 4)
 	{
 		printf("Error\n");
-		exit (98);
+		exit(98);
 	}
-	if (strlen(argv[2]) != 1)
+	num1 = atoi(argv[1]);
+	num2 = atoi(argv[3]);
+	/* printf("------ test params --------\n"); */
+	if ((*(argv[2]) == '/' || *(argv[2]) == '%') && num2 == 0)
 	{
-		printf("Error\n");
-		return (1);
+		printf("Error");
+		exit(100);
 	}
-	x = atoi(argv[1]);
-	y = atoi(argv[3]);
-	result = (*get_op_func(char argv[2]))(x, y);
-
+	/* printf("------ test verif completed --------\n"); */
+	fun_ptr = *get_op_func(argv[2]);
+	/* printf("---------- ptr sent completed -----------\n"); */
+	result = fun_ptr(num1, num2);
+	printf("%d\n", result);
+	/* TODO check op = NULL */
 	return (0);
 }

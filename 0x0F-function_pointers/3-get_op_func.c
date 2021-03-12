@@ -1,31 +1,29 @@
-#include <stddef.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "3-calc.h"
 /**
- * get_op_func - decide which function to call
- * @s: the operator
- * Return: pointer to which function to call
+ * *get_op_func - choose which func to call
+ * @s: param1
+ * Return: pointer to desired function
  **/
 int (*get_op_func(char *s))(int, int)
 {
-op_t ops[] = {
-	{"+", op_add},
-	{"-", op_sub},
-	{"*", op_mul},
-	{"/", op_div},
-	{"%", op_mod},
-	{NULL, NULL}
+	op_t ops[] = {
+		{"+", op_add},
+		{"-", op_sub},
+		{"*", op_mul},
+		{"/", op_div},
+		{"%", op_mod},
+		{NULL, NULL}
 	};
-    int i;
+	int i;
 
-for (i = 0; i < 5; i++)
-{
-	if (ops.op == *s)
+	i = 0;
+	while (i < 5)
 	{
-		return (ops.f);
-		break;
+		if (*(ops[i].op) == *s)
+		{
+			return (ops[i].f);
+		}
+		i++;
 	}
-}
-return (NULL);
+	return (NULL);
 }
