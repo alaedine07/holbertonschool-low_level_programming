@@ -28,6 +28,11 @@ int main(int argc, char **argv)
 	}
 	/* printf("------ test verif completed --------\n"); */
 	fun_ptr = *get_op_func(argv[2]);
+	if (fun_ptr == NULL)
+	{
+		printf("Error\n");
+		exit(99);
+	}
 	/* printf("---------- ptr sent completed -----------\n"); */
 	result = fun_ptr(num1, num2);
 	printf("%d\n", result);
