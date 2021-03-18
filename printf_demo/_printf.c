@@ -30,13 +30,15 @@ int format_resolve(char c, va_list arguments)
 		{"s", print_string},
 		{"d", print_int},
 		{"i", print_int},
-		{"b", toBi},
+		{"b", print_bin},
 		{"%", print_percent},
 		{"n", new_line},
 		{"r", print_rev},
 		{"f", form_feed},
 		{"t", print_tab},
 		{"R", print_rot13},
+		{"x", print_hex},
+		{"o", print_octale},
 		{NULL, NULL}
 	};
 	int i = 0;
@@ -82,11 +84,19 @@ int parser(const char *format, va_list arguments)
 				_putchar(*(format + i + 1));
 				printed_chars = printed_chars + 2;
 				i++;
+				if (*(format + i) == '\0')
+				{
+					return (-1);
+				}
 			}
 			else
 			{
 				printed_chars = printed_chars + sum;
 				i++;
+				if (*(format + i) == '\0')
+				{
+					return (-1);
+				}
 			}
 		}
 		else
@@ -107,6 +117,14 @@ int _printf(const char *format, ...)
 	int final_count;
 	va_list arguments;
 
+	if (!format || arguments == NULL)
+	{
+		return (-1);
+	}
+	if (format[0] == '%' && !format[1])
+	{
+		return (-1);
+	}
 	if (format == NULL)
 	{
 		return (-1);
