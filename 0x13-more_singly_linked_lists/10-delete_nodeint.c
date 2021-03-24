@@ -1,22 +1,6 @@
 #include <stdlib.h>
 #include "lists.h"
 /**
- * linked_len - return number of elements in a list
- * @h: header of list
- * Return: number of elements
-**/
-size_t linked_len(listint_t *h)
-{
-	size_t n = 0;
-
-	while (h != NULL)
-	{
-		n++;
-		h = h->next;
-	}
-	return (n);
-}
-/**
  * delete_nodeint_at_index - delete node at an index
  * @head: header of list
  * @index: index where to insert
@@ -27,14 +11,8 @@ int delete_nodeint_at_index(listint_t **head, unsigned int index)
 	listint_t *current_node;
 	listint_t *tmp;
 	unsigned int i = 0;
-	unsigned int len;
-
+	
 	if (*head == NULL)
-	{
-		return (-1);
-	}
-	len = linked_len(*head);
-	if (index > len)
 	{
 		return (-1);
 	}
@@ -50,6 +28,10 @@ int delete_nodeint_at_index(listint_t **head, unsigned int index)
 	{
 		current_node = current_node->next;
 		i++;
+	}
+	if (i < index - 1)
+	{
+		return (-1);
 	}
 	tmp = current_node->next->next;
 	free(current_node->next);
