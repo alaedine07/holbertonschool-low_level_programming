@@ -24,5 +24,6 @@ int pop_listint(listint_t **head)
 	current_node = current_node->next;
 	*head = current_node;
 	/* free the copied node */
+	free(to_delete);
 	return (x);
 }
