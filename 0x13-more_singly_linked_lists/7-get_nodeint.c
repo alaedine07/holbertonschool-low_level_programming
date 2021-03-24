@@ -20,7 +20,7 @@ listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
 		return (head);
 	}
 	current_node = head;
-	while (i < index)
+	while (i < index && head->next != NULL)
 	{
 		current_node = current_node->next;
 		i++;
