@@ -10,14 +10,15 @@ int pop_listint(listint_t **head)
 {
 	int x;
 	listint_t *current_node;
-	
+	listint_t *to_delete;
+
 	if (*head == NULL)
 	{
 		return (0);
 	}
 	current_node = *head;
 	/* copy the address of first node */
-	listint_t *to_delete = *head;
+	to_delete = *head;
 	x = to_delete->n;
 	/* move the head to the next node */
 	current_node = current_node->next;
