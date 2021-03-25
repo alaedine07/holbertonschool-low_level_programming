@@ -28,13 +28,13 @@ unsigned int binary_to_uint(const char *b)
 	unsigned int result = 0;
 	int len;
 
-	len = _strlen(b);
-	len = len - 1;
-	j = 0;
 	if (b == NULL)
 	{
 		return (0);
 	}
+	len = _strlen(b);
+	len = len - 1;
+	j = 0;
 	for (i = len; i >= 0; i--)
 	{
 		if (*(b + i) == '1')
