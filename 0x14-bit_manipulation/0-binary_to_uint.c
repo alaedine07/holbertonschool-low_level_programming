@@ -40,7 +40,7 @@ unsigned int binary_to_uint(const char *b)
 		if (*(b + i) == '1')
 		{
 			result = result + (1 << j);
-		}
+		};
 		if (*(b + i) != '1' && *(b + i) != '0')
 		{
 			return (0);
