@@ -21,11 +21,16 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		return (0);
 	}
 	fd = open(filename, O_RDONLY);
-	r = read(fd, buffer, letters);
-	if (fd < 0 || r < 0)
+	if (fd < 0)
 	{
 		free(buffer);
-		return (-1);
+		return (0);
+	}
+	r = read(fd, buffer, letters);
+	if (r < 0)
+	{
+		free(buffer);
+		return (0);
 	}
 	else
 	{
@@ -33,7 +38,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		if (w < 0)
 		{
 			free(buffer);
-			return (-1);
+			return (0);
 		}
 	}
 	free(buffer);
