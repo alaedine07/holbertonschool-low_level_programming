@@ -14,7 +14,7 @@ int copy_func(char *arg_1, char *arg_2)
 	file_from = open(arg_1, O_RDWR);
 	if (file_from < 0)
 		return (98);
-	file_to = open(arg_2, O_CREAT | O_RDWR | O_TRUNC, 0664);
+	file_to = open(arg_2, O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	if (file_to < 0)
 		return (99);
 	r = 1024;
@@ -24,7 +24,7 @@ int copy_func(char *arg_1, char *arg_2)
 		if (r < 0)
 			return (98);
 		w = write(file_to, buffer, r);
-		if (w < 0)
+		if (w < 0 || r != w)
 			return (99);
 	}
 	c = close(file_from);
