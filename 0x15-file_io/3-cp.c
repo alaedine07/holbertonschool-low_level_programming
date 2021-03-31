@@ -13,36 +13,32 @@ int copy_func(char *arg_1, char *arg_2)
 
 	file_from = open(arg_1, O_RDWR);
 	if (file_from < 0)
-	{
-		return(98);
-	}
+		return (98);
 	file_to = open(arg_2, O_CREAT | O_RDWR | O_TRUNC, 0664);
 	if (file_to < 0)
-	{
-		return(99);
-	}
+		return (99);
 	r = 1024;
 	while (r == 1024)
 	{
 		r = read(file_from, buffer, 1024);
 		if (r < 0)
-		{
-			dprintf(2, "Error: Can't read from file %s\n", arg_1);
-			return(98);
-		}
+			return (98);
 		w = write(file_to, buffer, r);
 		if (w < 0)
-		{
-			dprintf(2, "Error: Can't write to %s\n", arg_2);
-			return(99);
-		}
+			return (99);
 	}
 	c = close(file_from);
 	if (c < 0)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", c);
 		return (100);
+	}
 	c = close(file_to);
 	if (c < 0)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", c);
 		return (100);
+	}
 	return (0);
 }
 /**
@@ -70,10 +66,8 @@ int main(int argc, char **argv)
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 			exit(99);
 		case (100):
-			dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", exit_code);
 			exit(100);
 		default:
 			return (0);
 	}
-	return (1);
 }
