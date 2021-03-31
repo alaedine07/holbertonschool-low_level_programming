@@ -203,7 +203,7 @@ void check_elf(Elf64_Ehdr *header)
  * Return: function mimic Readelf command
  * Resources: https://github.com/TheCodeArtist/elf-parser/
  * https://llvm.org/doxygen/BinaryFormat_2ELF_8h_source.html#l00107
- * https://docs.oracle.com/cd/E19683-01/816-1386/6m7qcoblh/index.html
+ * docs.oracle.com/cd/E19683-01/816-1386/6m7qcoblh/index.html
 **/
 int main(int argc, char **argv)
 {
