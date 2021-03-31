@@ -168,11 +168,10 @@ void print_magic(Elf64_Ehdr *header)
 	int i;
 
 	printf("  Magic:   ");
-	for (i = 0; i < 15; i++)
+	for (i = 0; i < 16; i++)
 	{
 		printf("%02x ", header->e_ident[i]);
 	}
-	printf("%02x ", header->e_ident[15]);
 	printf("\n");
 }
 /**
@@ -194,7 +193,7 @@ void check_elf(Elf64_Ehdr *header)
 			exit(98);
 		}
 	}
-	printf("Elf Header: \n");
+	printf("Elf Header:\n");
 }
 /**
  * main - entry point
