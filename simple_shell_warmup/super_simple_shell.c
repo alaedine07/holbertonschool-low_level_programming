@@ -12,16 +12,17 @@ int main()
     int i;
     size_t n = 0;
     char *command;
+    get_X = 0;
     /* check if the input is coming from a file */
     if (isatty(STDIN_FILENO))
     {
         printf("$ ");
     }
-    while (getline(&command, &n , stdin) != -1)
+    while (getline(&lineptr, &n , stdin) != -1)
     {
-        printf("%s", command);
-        command = NULL;
+        printf("%s", lineptr);
+        lineptr =   NULL;
         printf("$ ");
     }
-    free(command);
+    free(lineptr);
 }
