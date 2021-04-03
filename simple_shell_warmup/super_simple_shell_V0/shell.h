@@ -10,5 +10,6 @@ int main(int argc, char **argv, char **env);
 void free_everything(char **string, int i);
 int calc_len(char *str);
 char **split_input(char *str);
+int check_builtins(char *command, char **envp);
 
 #endif
