@@ -1,6 +1,6 @@
 #include "shell.h"
 /**
- * free_everything - frees the memory
+ * free_everything - frees the memory if it fails
  * @string: pointer values being passed for freeing
  * @i: counter
 */
@@ -16,7 +16,7 @@ void free_everything(char **string, int i)
  * calc_len - return the length of passed string
  * @str: string being passed to check for words
  *
- * Return: number of words
+ * Return: number of words which is nb spaces + 1
 */
 int calc_len(char *str)
 {
@@ -35,6 +35,7 @@ int calc_len(char *str)
  * split_input - function that splits string into array of string
  * @str: string being passed
  * Return: array that hold the strings splitted
+ * this function only split based on spaces
  */
 char **split_input(char *str)
 {

@@ -5,7 +5,9 @@ int check_builtins(char *command, char **envp);
  * @argc: number of arguments
  * @argv: array of arguments passed
  * @env: array of string hold the environment variables
- * Return: trigger a while loop
+ * Return:	check if the input is coming from terminal or not
+ *			if the input is coming from terminal it will trigger
+ *			an infinite while loop that take user input
 **/
 int main(int argc, char **argv, char **env)
 {
