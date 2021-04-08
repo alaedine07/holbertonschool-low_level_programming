@@ -1,3 +1,4 @@
-/bin/ls -l -h /tmp
-TAB + command not working
-multiple output if command is coming from file
+fix _putchar for count > 10!
+memory allocation
+_realloc function
+when file doesn't exists error message is wrong
