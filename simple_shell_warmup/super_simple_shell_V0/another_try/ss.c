@@ -35,7 +35,6 @@ char *find_path()
 	}
 	return (NULL);
 }
-
 /**
  * _strlen - returns the length of a string
  * @s: string to be measured
@@ -51,7 +50,6 @@ unsigned int _strlen(char *s)
 		;
 	return (len);
 }
-
 /**
  * _print_env - print the env variable
  * @env: environment variables to print
@@ -78,7 +76,6 @@ void free_array(char **array)
 	}
 	free(array);
 }
-
 /**
  * _strncmp - compares two strings
  * @s1: first string, of two, to be compared in length
@@ -124,7 +121,6 @@ int check_builtins(char **command, char *input)
 	}
 	return (FAILURE);
 }
-
 /**
  * split_input - function that splits string into array of string
  * @str: string being passed
@@ -168,7 +164,7 @@ char *generate_command(char *directory, char *command)
 	// return the resutl as final_cmd
 	command_len = strlen(command);
 	directory_len = strlen(directory);
-	total_len = directory_len + command_len + 2;
+	total_len = directory_len + command_len + 2; // fuck my life
 	final_cmd = malloc(sizeof(char) * total_len);
 	while (j < total_len)
 	{
@@ -208,13 +204,11 @@ char *add_user_command(char *command, char **PATH_splitted)
 	while (PATH_splitted[i] != NULL)
 	{
 		final_cmd = generate_command(PATH_splitted[i], command);
-		// printf("User command + directory : %s\n", final_cmd);
 		i++;
 		/* until here everything is fine about leaks */
 		exists_program = stat(final_cmd, &st);
 		if (exists_program == 0)
 		{
-			printf("yup this program exists here \n");
 			return (final_cmd);
 		}
 		else
@@ -226,15 +220,16 @@ char *add_user_command(char *command, char **PATH_splitted)
 	return (NULL);	
 }
 
-int _exec_me(char *program_path, char **command_splitted)
+int _exec_me(char *program_path, char **command_splitted, char *input)
 {
-	//printf("I will execute this %s : %s\n", program_path, command_splitted[0]);
 	/* until here everything is fine about leaks */
 	if (fork() == 0)
 	{
 		if (execve(program_path, command_splitted, NULL) == -1)
 		{
 			perror("Error: ");
+			free(input);
+			free_array(command_splitted);
 			exit(127);
 		}
 	}
@@ -258,10 +253,9 @@ int check_path(char **command_splitted)
 	program_path = add_user_command(command_splitted[0], PATH_splitted);
 	if (program_path != NULL)
 	{
-		printf("found your Program PATH %s\n", program_path);
 		/* until here everything is fine about leaks */
 		// if the program path was foound execute it
-		executed = _exec_me(program_path, command_splitted);
+		executed = _exec_me(program_path, command_splitted, NULL);
 		if (executed == 1)
 		{
 			free(program_path);
@@ -273,6 +267,22 @@ int check_path(char **command_splitted)
 	free_array(PATH_splitted);
 	return(FAILURE);
 }
+void signal_handler(int sig)
+{
+	int er;
+
+	if (sig == SIGINT)
+	{
+		write(1, "\n$ ", 4);
+		/* important never remove */
+		er = fflush(stdout);
+		if (er != 0)
+		{
+			perror("failed to flush output stream");
+			exit(-1);
+		}
+	}
+}
 
 void handle_input(char *input)
 {
@@ -282,7 +292,9 @@ void handle_input(char *input)
 	char **command_splitted;
 	int is_builtin;
 	int is_in_path;
+	int executed;
 	
+	signal(SIGINT, signal_handler);
 	len = getline(&input, &size, stdin);
 	cmd_count++;
 	/* check if we are dealing with ctrl + d or EOF */
@@ -304,11 +316,10 @@ void handle_input(char *input)
 		/* until here everything is fine about leaks */
 		if (is_builtin == -1)
 		{
-			printf("not a builtin go check path\n");
 			is_in_path = check_path(command_splitted);
 			if (is_in_path == -1)
 			{
-				printf("program not found in PATH");
+				executed = _exec_me(command_splitted[0], command_splitted, input);
 			}
 		}
 		free_array(command_splitted);
@@ -330,7 +341,7 @@ int main(int argc, char **argv)
 		/* if input is coming from shell then print the promp */
 		if (isatty(STDIN_FILENO))
 		{
-			printf("#cisfun$ ");
+			printf("$ ");
 		}
 		handle_input(input);
 	}
