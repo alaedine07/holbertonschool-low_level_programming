@@ -163,10 +163,12 @@ char *generate_command(char *directory, char *command)
 	int directory_len = 0;
 	int total_len = 0;
 	char *final_cmd = NULL;
-
+	// allocate a space equal to len directory + len command
+	// copy the directory and command adding a / between them
+	// return the resutl as final_cmd
 	command_len = strlen(command);
 	directory_len = strlen(directory);
-	total_len = directory_len + command_len + 1;
+	total_len = directory_len + command_len + 2;
 	final_cmd = malloc(sizeof(char) * total_len);
 	while (j < total_len)
 	{
@@ -191,55 +193,85 @@ char *generate_command(char *directory, char *command)
  * @cmd_line: the input command line.
  * @_path_splitted: PATH splitted by ':'.
  * Return: 1 if the command exist
- */
-int add_user_command(char *command, char **PATH_splitted)
+*/
+char *add_user_command(char *command, char **PATH_splitted)
 {
 
 	char *final_cmd = NULL;
 	int i = 0;
 	int exists_program = 0;
 	struct stat st;
-	
+	// loop through each directory in path
+	// concatenate the directory with the user input
+	// check if the path generated exists and return it
+	// if it doesn't exists return NULL
 	while (PATH_splitted[i] != NULL)
 	{
 		final_cmd = generate_command(PATH_splitted[i], command);
-		printf("User command + directory : %s\n", final_cmd);
+		// printf("User command + directory : %s\n", final_cmd);
 		i++;
 		/* until here everything is fine about leaks */
 		exists_program = stat(final_cmd, &st);
 		if (exists_program == 0)
 		{
 			printf("yup this program exists here \n");
+			return (final_cmd);
 		}
 		else
 		{
 			free(final_cmd);
 		}
 	}
+	/* if no program is found return NULL */
+	return (NULL);	
+}
+
+int _exec_me(char *program_path, char **command_splitted)
+{
+	//printf("I will execute this %s : %s\n", program_path, command_splitted[0]);
+	/* until here everything is fine about leaks */
+	if (fork() == 0)
+	{
+		if (execve(program_path, command_splitted, NULL) == -1)
+		{
+			perror("Error: ");
+			exit(127);
+		}
+	}
+	wait(NULL);
 	return (SUCCESS);	
 }
-/**
- * check_path - function that checks if the command exist in PATH
- * @lineptr: the input command line.
- * @env: the environment variables.
- * @count: command count.
- * Return: found or not.
-*/
+
 int check_path(char **command_splitted)
 {
 	char *PATH = NULL;
 	char **PATH_splitted;
-	
+	char *program_path;
+	int executed = 0;
+
 	PATH = find_path();
 	PATH_splitted = split_input(PATH + 5, ":");
-	printf("PATH variable is%s\n", PATH);
-	printf("PATH directory 1 = %s\n", PATH_splitted[0]);
-	printf("PATH directory 2  = %s\n", PATH_splitted[1]);
+	// printf("PATH variable is%s\n", PATH);
+	// printf("PATH directory 1 = %s\n", PATH_splitted[0]);
+	// printf("PATH directory 2  = %s\n", PATH_splitted[1]);
 	/* until here everything is fine about leaks */
-	add_user_command(command_splitted[0], PATH_splitted);
-	
+	program_path = add_user_command(command_splitted[0], PATH_splitted);
+	if (program_path != NULL)
+	{
+		printf("found your Program PATH %s\n", program_path);
+		/* until here everything is fine about leaks */
+		// if the program path was foound execute it
+		executed = _exec_me(program_path, command_splitted);
+		if (executed == 1)
+		{
+			free(program_path);
+			free_array(PATH_splitted);
+			return (SUCCESS);
+		}
+	}
+	free(program_path);
 	free_array(PATH_splitted);
-	return(SUCCESS);
+	return(FAILURE);
 }
 
 void handle_input(char *input)
@@ -268,18 +300,18 @@ void handle_input(char *input)
 	else
 	{
 		command_splitted = split_input(input, " \t\r\n");
-		// printf("%s ", command_splitted[0]);
-		// printf("%s", command_splitted[1]);
 		is_builtin = check_builtins(command_splitted, input);
 		/* until here everything is fine about leaks */
 		if (is_builtin == -1)
 		{
 			printf("not a builtin go check path\n");
-			// exec_cmd(command_splitted);
 			is_in_path = check_path(command_splitted);
+			if (is_in_path == -1)
+			{
+				printf("program not found in PATH");
+			}
 		}
 		free_array(command_splitted);
-		
 	}
 	free(input);
 }
