@@ -21,7 +21,7 @@ char *hash_table_get(const hash_table_t *ht, const char *key)
 	{
 		if (strcmp(curr->key, key) == 0)
 		{
-			return (curr->key);
+			return (curr->value);
 		}
 	}
 	/* didn't find any match */
