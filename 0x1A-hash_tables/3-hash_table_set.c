@@ -21,6 +21,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	/* navigate linked list */
 	while (curr)
 	{
+		/* update value of a key */
 		if (strcmp(key, curr->key) == 0)
 		{
 			free(curr->value);
