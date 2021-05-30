@@ -10,38 +10,42 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int slot;
 	const char *val_copy;
+	const char *key_copy;
 	hash_node_t *aux = NULL;
 	hash_node_t *new_node = NULL;
+	hash_node_t *curr = NULL;
 
 	if (ht == NULL || key == NULL || value == NULL || strcmp(key, "") == 0)
-	{
 		return (0);
-	}
 	new_node = malloc(sizeof(hash_node_t *));
 	if (new_node == NULL)
-	{
 		return (0);
-	}
-	if (key == (const char *)"")
-	{
-		return (0);
-	}
-	/* get the slot */
 	slot = key_index((const unsigned char *)key, ht->size);
 	val_copy = strdup(value);
-	new_node->key = (char *)key;
+	key_copy = strdup(key);
+	new_node->key = (char *)key_copy;
 	new_node->value = (char *)val_copy;
+	curr = ht->array[slot];
+	if (curr != NULL)
+	{
+		if (strcmp(curr->key, key) == 0)
+		{
+			free(curr->value);
+			curr->value = (char *)val_copy;
+			return (1);
+		}
+	}
+	/* collision case */
 	if (ht->array[slot] == NULL)
 	{
-
 		new_node->next = NULL;
 		ht->array[slot] = new_node;
 	}
 	else
 	{
-		aux = new_node;
-		new_node->next = ht->array[slot];
-		ht->array[slot] = aux;
+		aux = ht->array[slot];
+		new_node->next = aux;
+		ht->array[slot] = new_node;
 	}
 	return (1);
 }
